@@ -38,14 +38,11 @@ very simple !
 		  'name'=>'ali' ,
 		  'family'=>'karimi'
 		]
-      	]);
-
+      	]);	
 	
-#read data using where
-
-```php 
-<?php 
-
+	
+	
+#read data using where -----------------
 
 	$array = [
 		  'name'=>'hadi' ,
@@ -61,11 +58,70 @@ very simple !
 		'name'=>'hadi'
 	] ;
 	
-	ObArray::where($array,function($item,$params){
+	$data = ObArray::where($array,function($item,$params){
 		$status = false ;
 		if($item->name == $param->name){
 			$stauts = true ;
 		}
 		return ['status'=>$status];
-	},$params)
+	},$params) ;
+	
+	
+#or :
+
+$data = ObArray::findBy($array,'name','hadi');
+
+
+
+#order by array---------------
+$data = ObArray::orderBy($array,'name','asc');
+
+#group by array -------------------
+$data = ObArray::groupBy($array,'name');
+
+#update array---------------
+$data = ObArray::update($array,ObArray::where(function($item,$params){
+	$status = false ;
+		if($item->name == $param->name){
+			$stauts = true ;
+		}
+		return ['status'=>$status];
+},(object)[
+	'name'=>'hadi'
+]),[
+	'name'=>'hadi 2'
+]);
+
+
+
+#delete from array ----
+$data = ObArray::delete($array,ObArray::where(function($item,$params){
+	$status = false ;
+		if($item->name == $param->name){
+			$stauts = true ;
+		}
+		return ['status'=>$status];
+},(object)[
+	'name'=>'hadi'
+]);
+
+
+
+#pagination array data 
+
+$limit = 2 ;
+$page = 1 ;
+
+$data = ObArray::limit($array,$limit,$page);
+
+
+
+
+
+
+
+
+
+
+
 	
